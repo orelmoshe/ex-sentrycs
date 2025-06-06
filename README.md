@@ -49,3 +49,7 @@ This app allows users to check if a 5-letter word is a valid English word (dicti
 - `public/assets/fonts` - Custom fonts
 
 ---
+
+![Screenshot](resources/home.png =800x400)
+![Screenshot](resources/success.png =800x400)
+![Screenshot](resources/error.png =800x400)
