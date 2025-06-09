@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 import ButtonMUI from '@mui/material/Button';
 import { colors, styled } from '@mui/material';
 
-import { useAppContext } from '../providers/AppProvider';
 import { isEnglishWord } from '../utils/utils';
+import { useAppContext } from '../providers/AppProvider';
 
 const Container = styled('div')({});
 
@@ -20,20 +20,28 @@ const Button = styled(ButtonMUI)({
 const WordCheckerActions: React.FC = () => {
   const { selectedCharIndex, setSelectedCharIndex, setWord, word } = useAppContext();
 
+  const [loading, setLoading] = React.useState(false);
+
   const handleDelete = () => {
     setWord(prev => [...prev.slice(0, selectedCharIndex), '', ...prev.slice(selectedCharIndex + 1)]);
     setSelectedCharIndex(prev => (prev + 1) % 5);
   };
 
   const handleEnter = async () => {
+    setLoading(true);
     const isWordExist = await isEnglishWord(word.join(''));
+    setLoading(false);
     isWordExist ? toast.success('Valid word!') : toast.error('Invalid word!');
   };
 
   return (
     <Container>
-      <Button onClick={handleDelete}>Delete</Button>
-      <Button onClick={handleEnter}>Enter</Button>
+      <Button onClick={handleDelete} disabled={loading}>
+        Delete
+      </Button>
+      <Button onClick={handleEnter} loading={loading}>
+        Enter
+      </Button>
     </Container>
   );
 };

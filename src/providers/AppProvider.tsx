@@ -5,8 +5,6 @@ export interface AppProps {
   setWord: React.Dispatch<React.SetStateAction<string[]>>;
   selectedCharIndex: number;
   setSelectedCharIndex: React.Dispatch<React.SetStateAction<number>>;
-  hasEnglishWord: boolean;
-  setHasEnglishWord: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AppContext = React.createContext<AppProps>({} as AppProps);
@@ -18,9 +16,8 @@ interface AppProviderProps {
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [word, setWord] = React.useState<string[]>(['', '', '', '', '']);
   const [selectedCharIndex, setSelectedCharIndex] = React.useState<number>(0);
-  const [hasEnglishWord, setHasEnglishWord] = React.useState<boolean>(false);
 
-  const value = { word, setWord, selectedCharIndex, setSelectedCharIndex, hasEnglishWord, setHasEnglishWord };
+  const value = { word, setWord, selectedCharIndex, setSelectedCharIndex };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
