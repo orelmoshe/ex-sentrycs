@@ -3,7 +3,7 @@ import { colors, styled } from '@mui/material';
 import ButtonMUI from '@mui/material/Button';
 
 import H2 from '../styledComponents/H2';
-import { useAppContext } from '../providers/AppProvider';
+import EventListener from '../utils/eventListener';
 
 const Container = styled('div')({
   maxWidth: 1100,
@@ -23,12 +23,9 @@ const KeyboardChar = styled(ButtonMUI)({
 const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
 const Keyboard: React.FC = () => {
-  const { selectedCharIndex, setSelectedCharIndex, setWord } = useAppContext();
+  const eventListener = EventListener.getInstance();
 
-  const clickHandler = (char: string) => () => {
-    setWord(prev => [...prev.slice(0, selectedCharIndex), char, ...prev.slice(selectedCharIndex + 1)]);
-    setSelectedCharIndex(prev => (prev + 1) % 5);
-  };
+  const clickHandler = (char: string) => () => eventListener.emit('CHARACTER_CLICK', char);
 
   return (
     <Container>

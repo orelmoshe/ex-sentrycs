@@ -1,10 +1,8 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 import ButtonMUI from '@mui/material/Button';
 import { colors, styled } from '@mui/material';
 
-import { useAppContext } from '../providers/AppProvider';
-import { isEnglishWord } from '../utils/utils';
+import EventListener from '../utils/eventListener';
 
 const Container = styled('div')({});
 
@@ -18,17 +16,11 @@ const Button = styled(ButtonMUI)({
 });
 
 const WordCheckerActions: React.FC = () => {
-  const { selectedCharIndex, setSelectedCharIndex, setWord, word } = useAppContext();
+  const eventListener = EventListener.getInstance();
 
-  const handleDelete = () => {
-    setWord(prev => [...prev.slice(0, selectedCharIndex), '', ...prev.slice(selectedCharIndex + 1)]);
-    setSelectedCharIndex(prev => (prev + 1) % 5);
-  };
+  const handleDelete = () => eventListener.emit('BACKSPACE');
 
-  const handleEnter = async () => {
-    const isWordExist = await isEnglishWord(word.join(''));
-    isWordExist ? toast.success('Valid word!') : toast.error('Invalid word!');
-  };
+  const handleEnter = () => eventListener.emit('ENTER');
 
   return (
     <Container>

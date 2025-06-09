@@ -4,7 +4,10 @@ A React application for checking English words.
 
 ## Description
 
-This app allows users to check if a 5-letter word is a valid English word (dictionaryapi.dev), using an interactive input field and virtual keyboard. The check is performed via an external API.
+This application enables users to verify whether a 5-letter word exists in the English language. Users can enter words using an on-screen virtual keyboard. The app then checks the validity of the word and provides immediate feedback.
+
+## Requirement
+To communicate between components, you should use event listeners. This allows components to respond to user actions or changes in state by emitting and handling custom events.
 
 ### Prerequisites
 
