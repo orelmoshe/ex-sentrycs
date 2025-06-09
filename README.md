@@ -9,6 +9,9 @@ This application enables users to verify whether a 5-letter word exists in the E
 ## Requirement
 To communicate between components, you should use event listeners. This allows components to respond to user actions or changes in state by emitting and handling custom events.
 
+##
+**Note:** There is a branch that contains a version of the app implemented with React Context instead of event listeners for component communication.
+
 ### Prerequisites
 
 - Node.js 18.15.0+
